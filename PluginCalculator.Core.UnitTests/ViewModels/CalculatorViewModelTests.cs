@@ -304,6 +304,15 @@ namespace PluginCalculator.Core.UnitTests.ViewModels
 		}
 
 		[Test]
+		public void ToggleSignPressed_ZeroCanNotGoNegative() {
+			_target.ResultField = "0";
+
+			_target.ToggleSignPressed.Execute ();
+
+			Assert.AreEqual ("0", _target.ResultField);
+		}
+
+		[Test]
 		public void ToggleSignPressed_FromNegative() {
 			_target.ResultField = "-13.37";
 

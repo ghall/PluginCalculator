@@ -136,7 +136,7 @@ namespace PluginCalculator.Core.ViewModels
 		private void DoToggleSignPressed() {
 			if (ResultField.StartsWith ("-"))
 				ResultField = ResultField.Substring (1);
-			else
+			else if ("0" != ResultField)
 				ResultField = "-" + ResultField;
 		}
 	}
