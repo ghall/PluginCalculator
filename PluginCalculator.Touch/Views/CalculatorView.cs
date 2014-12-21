@@ -12,14 +12,16 @@ namespace PluginCalculator.Touch.Views
 		{
 		}
 
-		public override void DidReceiveMemoryWarning ()
+		public override UIStatusBarStyle PreferredStatusBarStyle ()
 		{
-			base.DidReceiveMemoryWarning ();
+			return UIStatusBarStyle.LightContent;
 		}
 
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+
+			NavigationController.NavigationBarHidden = true;
 		}
 	}
 }
