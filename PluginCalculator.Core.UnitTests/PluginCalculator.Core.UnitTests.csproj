@@ -57,9 +57,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
+    <Folder Include="Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewModels\CalculatorViewModelTests.cs" />
+    <Compile Include="Repositories\MathRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PluginCalculator.Core\PluginCalculator.Core.csproj">

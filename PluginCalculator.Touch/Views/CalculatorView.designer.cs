@@ -46,9 +46,6 @@ namespace PluginCalculator.Touch.Views
 		MonoTouch.UIKit.UIButton One { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIButton Percent { get; set; }
-
-		[Outlet]
 		MonoTouch.UIKit.UIButton Plus { get; set; }
 
 		[Outlet]
@@ -74,9 +71,24 @@ namespace PluginCalculator.Touch.Views
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (ResultField != null) {
-				ResultField.Dispose ();
-				ResultField = null;
+			if (Clear != null) {
+				Clear.Dispose ();
+				Clear = null;
+			}
+
+			if (Decimal != null) {
+				Decimal.Dispose ();
+				Decimal = null;
+			}
+
+			if (Divise != null) {
+				Divise.Dispose ();
+				Divise = null;
+			}
+
+			if (Eight != null) {
+				Eight.Dispose ();
+				Eight = null;
 			}
 
 			if (Equals != null) {
@@ -84,9 +96,14 @@ namespace PluginCalculator.Touch.Views
 				Equals = null;
 			}
 
-			if (Plus != null) {
-				Plus.Dispose ();
-				Plus = null;
+			if (Five != null) {
+				Five.Dispose ();
+				Five = null;
+			}
+
+			if (Four != null) {
+				Four.Dispose ();
+				Four = null;
 			}
 
 			if (Minus != null) {
@@ -99,59 +116,9 @@ namespace PluginCalculator.Touch.Views
 				Multiply = null;
 			}
 
-			if (Divise != null) {
-				Divise.Dispose ();
-				Divise = null;
-			}
-
-			if (Decimal != null) {
-				Decimal.Dispose ();
-				Decimal = null;
-			}
-
-			if (Three != null) {
-				Three.Dispose ();
-				Three = null;
-			}
-
-			if (Six != null) {
-				Six.Dispose ();
-				Six = null;
-			}
-
 			if (Nine != null) {
 				Nine.Dispose ();
 				Nine = null;
-			}
-
-			if (Percent != null) {
-				Percent.Dispose ();
-				Percent = null;
-			}
-
-			if (Zero != null) {
-				Zero.Dispose ();
-				Zero = null;
-			}
-
-			if (Two != null) {
-				Two.Dispose ();
-				Two = null;
-			}
-
-			if (Five != null) {
-				Five.Dispose ();
-				Five = null;
-			}
-
-			if (Eight != null) {
-				Eight.Dispose ();
-				Eight = null;
-			}
-
-			if (ToggleSign != null) {
-				ToggleSign.Dispose ();
-				ToggleSign = null;
 			}
 
 			if (One != null) {
@@ -159,9 +126,14 @@ namespace PluginCalculator.Touch.Views
 				One = null;
 			}
 
-			if (Four != null) {
-				Four.Dispose ();
-				Four = null;
+			if (Plus != null) {
+				Plus.Dispose ();
+				Plus = null;
+			}
+
+			if (ResultField != null) {
+				ResultField.Dispose ();
+				ResultField = null;
 			}
 
 			if (Seven != null) {
@@ -169,9 +141,29 @@ namespace PluginCalculator.Touch.Views
 				Seven = null;
 			}
 
-			if (Clear != null) {
-				Clear.Dispose ();
-				Clear = null;
+			if (Six != null) {
+				Six.Dispose ();
+				Six = null;
+			}
+
+			if (Three != null) {
+				Three.Dispose ();
+				Three = null;
+			}
+
+			if (ToggleSign != null) {
+				ToggleSign.Dispose ();
+				ToggleSign = null;
+			}
+
+			if (Two != null) {
+				Two.Dispose ();
+				Two = null;
+			}
+
+			if (Zero != null) {
+				Zero.Dispose ();
+				Zero = null;
 			}
 		}
 	}

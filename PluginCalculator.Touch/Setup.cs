@@ -2,6 +2,8 @@ using MonoTouch.UIKit;
 using Cirrious.CrossCore.Platform;
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Touch.Platform;
+using Cirrious.CrossCore;
+using PluginCalculator.Core.Repositories.Math;
 
 namespace PluginCalculator.Touch
 {
@@ -21,5 +23,12 @@ namespace PluginCalculator.Touch
         {
             return new DebugTrace();
         }
+
+		protected override void InitializeLastChance ()
+		{
+			base.InitializeLastChance ();
+
+			Mvx.LazyConstructAndRegisterSingleton<IMathRepository, MathRepository> ();
+		}
 	}
 }

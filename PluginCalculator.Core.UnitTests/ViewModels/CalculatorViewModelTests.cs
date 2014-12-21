@@ -320,6 +320,15 @@ namespace PluginCalculator.Core.UnitTests.ViewModels
 
 			Assert.AreEqual ("13.37", _target.ResultField);
 		}
+
+		[Test]
+		public void ClearPressed_Success() {
+			_target.ResultField = "-13.37";
+
+			_target.ClearPressed.Execute ();
+
+			Assert.AreEqual ("0", _target.ResultField);
+		}
 	}
 }
 

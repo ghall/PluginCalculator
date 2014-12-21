@@ -39,6 +39,7 @@ namespace PluginCalculator.Touch.Views
 			set.Bind (Nine).To (vm => vm.NinePressed);
 			set.Bind (Decimal).To (vm => vm.DecimalPressed);
 			set.Bind (ToggleSign).To (vm => vm.ToggleSignPressed);
+			set.Bind (Clear).To (vm => vm.ClearPressed);
 			set.Apply ();
 		}
 	}
