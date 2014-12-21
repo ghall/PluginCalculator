@@ -10,7 +10,7 @@ namespace PluginCalculator.Touch.NativePlugins
 		public void ShowMessage (string title, string message, string button)
 		{
 			var view = new UIAlertView (title, message, null, button);
-			view.InvokeOnMainThread (() => view.Show());
+			view.InvokeOnMainThread (view.Show);
 		}
 
 	}
