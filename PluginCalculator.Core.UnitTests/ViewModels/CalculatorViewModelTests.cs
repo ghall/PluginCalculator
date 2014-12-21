@@ -4,6 +4,9 @@ using PluginCalculator.Core.ViewModels;
 using Cirrious.MvvmCross.Test.Core;
 using PluginCalculator.Core.Repositories.Math;
 using Moq;
+using PluginCalculator.Core.Repositories.Result;
+using System.Threading;
+using PluginCalculator.Core.NativePlugins;
 
 namespace PluginCalculator.Core.UnitTests.ViewModels
 {
@@ -12,14 +15,29 @@ namespace PluginCalculator.Core.UnitTests.ViewModels
 	{
 		private CalculatorViewModel _target;
 		private Mock<IMathRepository> _mathRepository;
+		private Mock<IResultRepository> _resultRepository;
+		private Mock<IDialogPlugin> _dialogPlugin;
+		private Mock<ILogger> _loggerPlugin;
 
 		[SetUp]
 		public void Setup() {
 			base.Setup ();
 
 			_mathRepository = new Mock<IMathRepository> ();
+			_resultRepository = new Mock<IResultRepository> ();
+			_dialogPlugin = new Mock<IDialogPlugin> ();
+			_loggerPlugin = new Mock<ILogger> ();
 
-			_target = new CalculatorViewModel (_mathRepository.Object);
+			_target = new CalculatorViewModel (_mathRepository.Object, _resultRepository.Object, _dialogPlugin.Object, _loggerPlugin.Object);
+		}
+
+		[Test]
+		public void IsLoading_TestProperty() {
+			Assume.That (_target.IsLoading, Is.EqualTo (false));
+
+			_target.IsLoading = true;
+
+			Assert.AreEqual (true, _target.IsLoading);
 		}
 
 		[Test]
@@ -373,6 +391,89 @@ namespace PluginCalculator.Core.UnitTests.ViewModels
 
 			Assert.AreEqual ("3", _target.ResultBacklog);
 			Assert.AreEqual (MathOperation.Division, _target.PendingOperation);
+		}
+
+		[Test]
+		public void EqualsPressed_Success() {
+			_mathRepository
+				.Setup (x => x.IsValid (It.IsAny<string> (), It.IsAny<MathOperation> (), It.IsAny<string> ()))
+				.Returns (EquationValidity.Valid);
+			_mathRepository
+				.Setup (x => x.CreateEquation (It.IsAny<string> (), It.IsAny<MathOperation> (), It.IsAny<string> ()))
+				.Returns ("3/2");
+			_resultRepository
+				.Setup (x => x.Execute (It.IsAny<string> ()))
+				.Returns ("1.5");
+			_target.ResultField = "3";
+			_target.DividePressed.Execute ();
+			_target.ResultField = "2";
+
+			Assume.That (_target.ResultBacklog, Is.EqualTo ("3"));
+			Assume.That (_target.PendingOperation, Is.EqualTo (MathOperation.Division));
+			Assume.That (_target.ResultField, Is.EqualTo ("2"));
+
+			_target.EqualsPressed.Execute ();
+
+			Thread.Sleep (100);
+
+			Assert.IsNull (_target.ResultBacklog);
+			Assert.AreEqual ("1.5", _target.ResultField);
+		}
+
+		[Test]
+		public void EqualsPressed_DivByZero() {
+			_mathRepository
+				.Setup (x => x.IsValid (It.IsAny<string> (), It.IsAny<MathOperation> (), It.IsAny<string> ()))
+				.Returns (EquationValidity.DivisionByZero);
+			_mathRepository
+				.Setup (x => x.CreateEquation (It.IsAny<string> (), It.IsAny<MathOperation> (), It.IsAny<string> ()))
+				.Returns ("3/0");
+			_resultRepository
+				.Setup (x => x.Execute (It.IsAny<string> ()))
+				.Returns (() => null);
+			_target.ResultField = "3";
+			_target.DividePressed.Execute ();
+			_target.ResultField = "0";
+
+			Assume.That (_target.ResultBacklog, Is.EqualTo ("3"));
+			Assume.That (_target.PendingOperation, Is.EqualTo (MathOperation.Division));
+			Assume.That (_target.ResultField, Is.EqualTo ("0"));
+
+			_target.EqualsPressed.Execute ();
+
+			Thread.Sleep (100);
+
+			_dialogPlugin.Verify (x => x.ShowMessage (It.IsAny<string> (), It.Is<string> (s => "Division by zero" == s), It.IsAny<string> ()), Times.Once);
+			Assert.AreEqual ("3", _target.ResultBacklog);
+			Assert.AreEqual ("0", _target.ResultField);
+		}
+
+		[Test]
+		public void EqualsPressed_ServerError() {
+			_mathRepository
+				.Setup (x => x.IsValid (It.IsAny<string> (), It.IsAny<MathOperation> (), It.IsAny<string> ()))
+				.Returns (EquationValidity.Valid);
+			_mathRepository
+				.Setup (x => x.CreateEquation (It.IsAny<string> (), It.IsAny<MathOperation> (), It.IsAny<string> ()))
+				.Returns ("3/2");
+			_resultRepository
+				.Setup (x => x.Execute (It.IsAny<string> ()))
+				.Returns (() => null);
+			_target.ResultField = "3";
+			_target.DividePressed.Execute ();
+			_target.ResultField = "2";
+
+			Assume.That (_target.ResultBacklog, Is.EqualTo ("3"));
+			Assume.That (_target.PendingOperation, Is.EqualTo (MathOperation.Division));
+			Assume.That (_target.ResultField, Is.EqualTo ("2"));
+
+			_target.EqualsPressed.Execute ();
+
+			Thread.Sleep (100);
+
+			_dialogPlugin.Verify (x => x.ShowMessage (It.IsAny<string> (), It.Is<string> (s => "Server error" == s), It.IsAny<string> ()), Times.Once);
+			Assert.AreEqual ("3", _target.ResultBacklog);
+			Assert.AreEqual ("2", _target.ResultField);
 		}
 	}
 }

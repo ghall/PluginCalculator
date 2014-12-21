@@ -44,6 +44,7 @@ namespace PluginCalculator.Touch.Views
 			set.Bind (Multiply).To (vm => vm.TimesPressed);
 			set.Bind (Plus).To (vm => vm.PlusPressed);
 			set.Bind (Minus).To (vm => vm.MinusPressed);
+			set.Bind (Equals).To (vm => vm.EqualsPressed);
 			set.Apply ();
 		}
 	}

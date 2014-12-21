@@ -4,6 +4,9 @@ using Cirrious.MvvmCross.ViewModels;
 using Cirrious.MvvmCross.Touch.Platform;
 using Cirrious.CrossCore;
 using PluginCalculator.Core.Repositories.Math;
+using PluginCalculator.Core.NativePlugins;
+using PluginCalculator.Touch.NativePlugins;
+using PluginCalculator.Core.Repositories.Result;
 
 namespace PluginCalculator.Touch
 {
@@ -29,6 +32,9 @@ namespace PluginCalculator.Touch
 			base.InitializeLastChance ();
 
 			Mvx.LazyConstructAndRegisterSingleton<IMathRepository, MathRepository> ();
+			Mvx.LazyConstructAndRegisterSingleton<ILogger, TouchLogger> ();
+			Mvx.LazyConstructAndRegisterSingleton<IDialogPlugin, TouchDialogPlugin> ();
+			Mvx.LazyConstructAndRegisterSingleton<IResultRepository, JsonResultRepository> ();
 		}
 	}
 }

@@ -124,6 +124,8 @@
     <Compile Include="Views\CalculatorView.designer.cs">
       <DependentUpon>CalculatorView.cs</DependentUpon>
     </Compile>
+    <Compile Include="NativePlugins\TouchDialogPlugin.cs" />
+    <Compile Include="NativePlugins\TouchLogger.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
@@ -134,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
+    <Folder Include="NativePlugins\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Views\CalculatorView.xib" />

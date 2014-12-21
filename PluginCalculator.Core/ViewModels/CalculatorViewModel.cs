@@ -1,12 +1,18 @@
 ﻿using System;
 using Cirrious.MvvmCross.ViewModels;
 using PluginCalculator.Core.Repositories.Math;
+using System.Threading.Tasks;
+using PluginCalculator.Core.Repositories.Result;
+using PluginCalculator.Core.NativePlugins;
 
 namespace PluginCalculator.Core.ViewModels
 {
 	public class CalculatorViewModel : MvxViewModel
 	{
 		private readonly IMathRepository _mathRepository;
+		private readonly IResultRepository _resultRepository;
+		private readonly IDialogPlugin _dialogPlugin;
+		private readonly ILogger _logger;
 
 		private string _resultField;
 		private string _resultBacklog;
@@ -29,10 +35,15 @@ namespace PluginCalculator.Core.ViewModels
 		private IMvxCommand _minusPressed;
 		private IMvxCommand _timesPressed;
 		private IMvxCommand _dividePressed;
+		private IMvxCommand _equalsPressed;
+		private bool _isLoading;
 
-		public CalculatorViewModel (IMathRepository mathRepository)
+		public CalculatorViewModel (IMathRepository mathRepository, IResultRepository resultRepository, IDialogPlugin dialogPlugin, ILogger logger)
 		{
 			_mathRepository = mathRepository;
+			_resultRepository = resultRepository;
+			_dialogPlugin = dialogPlugin;
+			_logger = logger;
 		}
 
 		public string DisplayField {
@@ -59,6 +70,14 @@ namespace PluginCalculator.Core.ViewModels
 
 		public MathOperation PendingOperation {
 			get { return _pendingOperation; }
+		}
+
+		public bool IsLoading {
+			get { return _isLoading; }
+			set { 
+				_isLoading = value;
+				RaisePropertyChanged (() => IsLoading);
+			}
 		}
 
 		public IMvxCommand ZeroPressed {
@@ -127,6 +146,10 @@ namespace PluginCalculator.Core.ViewModels
 
 		public IMvxCommand DividePressed {
 			get { return _dividePressed ?? (_dividePressed = new MvxCommand(DoDividePressed)); }
+		}
+
+		public IMvxCommand EqualsPressed {
+			get { return _equalsPressed ?? (_equalsPressed = new MvxCommand(DoEqualsPressed)); }
 		}
 			
 		private void NumberPressed(int number) {
@@ -227,6 +250,42 @@ namespace PluginCalculator.Core.ViewModels
 			_pendingOperation = operation;
 			ResultBacklog = ResultField;
 			ResultField = null;
+		}
+
+		private void DoEqualsPressed() {
+			if (null == ResultBacklog)
+				return;
+
+			switch (_mathRepository.IsValid (ResultBacklog, PendingOperation, ResultField)) {
+			case EquationValidity.Valid:
+				break;
+			case EquationValidity.DivisionByZero:
+				_dialogPlugin.ShowMessage ("Error", "Division by zero", "Cancel");
+				return;
+			}
+
+			var equation = _mathRepository.CreateEquation (ResultBacklog, PendingOperation, ResultField);
+
+			IsLoading = true;
+
+			Task.Run (() => {
+				try {
+					var result = _resultRepository.Execute (equation);
+					if (null == result) {
+						_dialogPlugin.ShowMessage("Error", "Server error", "Cancel");
+						return;
+					}
+
+					ResultBacklog = null;
+					ResultField = result;
+				} catch (Exception e) {
+					_logger.Log(e.Message);
+					_logger.Log(e.StackTrace);
+					_dialogPlugin.ShowMessage("Error", "Internal error: " + e.Message, "Cancel");
+				} finally {
+					IsLoading = false;
+				}
+			});
 		}
 	}
 }
