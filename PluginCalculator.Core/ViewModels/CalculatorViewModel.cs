@@ -6,6 +6,8 @@ namespace PluginCalculator.Core.ViewModels
 {
 	public class CalculatorViewModel : MvxViewModel
 	{
+		private readonly IMathRepository _mathRepository;
+
 		private string _resultField;
 		private string _resultBacklog;
 		private bool _hasPendingOperation;
@@ -28,8 +30,9 @@ namespace PluginCalculator.Core.ViewModels
 		private IMvxCommand _timesPressed;
 		private IMvxCommand _dividePressed;
 
-		public CalculatorViewModel ()
+		public CalculatorViewModel (IMathRepository mathRepository)
 		{
+			_mathRepository = mathRepository;
 		}
 
 		public string DisplayField {

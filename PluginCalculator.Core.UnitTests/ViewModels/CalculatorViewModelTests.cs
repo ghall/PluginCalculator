@@ -3,6 +3,7 @@ using NUnit.Framework;
 using PluginCalculator.Core.ViewModels;
 using Cirrious.MvvmCross.Test.Core;
 using PluginCalculator.Core.Repositories.Math;
+using Moq;
 
 namespace PluginCalculator.Core.UnitTests.ViewModels
 {
@@ -10,12 +11,15 @@ namespace PluginCalculator.Core.UnitTests.ViewModels
 	public class CalculatorViewModelTests : MvxIoCSupportingTest
 	{
 		private CalculatorViewModel _target;
+		private Mock<IMathRepository> _mathRepository;
 
 		[SetUp]
 		public void Setup() {
 			base.Setup ();
 
-			_target = new CalculatorViewModel ();
+			_mathRepository = new Mock<IMathRepository> ();
+
+			_target = new CalculatorViewModel (_mathRepository.Object);
 		}
 
 		[Test]
