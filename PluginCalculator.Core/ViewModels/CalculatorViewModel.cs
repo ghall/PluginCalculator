@@ -17,6 +17,7 @@ namespace PluginCalculator.Core.ViewModels
 		private string _resultField;
 		private string _resultBacklog;
 		private bool _hasPendingOperation;
+		private bool _shouldClearOnNumberPress;
 		private MathOperation _pendingOperation;
 		private IMvxCommand _zeroPressed;
 		private IMvxCommand _onePressed;
@@ -156,6 +157,11 @@ namespace PluginCalculator.Core.ViewModels
 			if (IsLoading)
 				return;
 
+			if (_shouldClearOnNumberPress) {
+				_shouldClearOnNumberPress = false;
+				ResultField = "0";
+			}
+
 			if (_hasPendingOperation) {
 				_hasPendingOperation = false;
 				ResultField = "0";
@@ -210,6 +216,11 @@ namespace PluginCalculator.Core.ViewModels
 		private void DoDecimalPressed() {
 			if (IsLoading)
 				return;
+
+			if (_shouldClearOnNumberPress) {
+				_shouldClearOnNumberPress = false;
+				ResultField = "0";
+			}
 
 			if (_hasPendingOperation) {
 				_hasPendingOperation = false;
@@ -296,6 +307,7 @@ namespace PluginCalculator.Core.ViewModels
 
 					ResultBacklog = null;
 					ResultField = result;
+					_shouldClearOnNumberPress = true;
 				} catch (Exception e) {
 					_logger.Log(e.Message);
 					_logger.Log(e.StackTrace);
