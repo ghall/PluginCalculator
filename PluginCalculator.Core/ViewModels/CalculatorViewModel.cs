@@ -153,6 +153,9 @@ namespace PluginCalculator.Core.ViewModels
 		}
 			
 		private void NumberPressed(int number) {
+			if (IsLoading)
+				return;
+
 			if (_hasPendingOperation) {
 				_hasPendingOperation = false;
 				ResultField = "0";
@@ -205,6 +208,9 @@ namespace PluginCalculator.Core.ViewModels
 		}
 
 		private void DoDecimalPressed() {
+			if (IsLoading)
+				return;
+
 			if (_hasPendingOperation) {
 				_hasPendingOperation = false;
 				ResultField = "0";
@@ -217,6 +223,9 @@ namespace PluginCalculator.Core.ViewModels
 		}
 
 		private void DoToggleSignPressed() {
+			if (IsLoading)
+				return;
+
 			if (ResultField.StartsWith ("-"))
 				ResultField = ResultField.Substring (1);
 			else if ("0" != ResultField)
@@ -224,6 +233,9 @@ namespace PluginCalculator.Core.ViewModels
 		}
 
 		private void DoClearPressed() {
+			if (IsLoading)
+				return;
+
 			_hasPendingOperation = false;
 			ResultField = null;
 			ResultBacklog = null;
@@ -246,6 +258,9 @@ namespace PluginCalculator.Core.ViewModels
 		}
 
 		private void OperatorPressed(MathOperation operation) {
+			if (IsLoading)
+				return;
+
 			_hasPendingOperation = true;
 			_pendingOperation = operation;
 			ResultBacklog = ResultField;
@@ -253,6 +268,9 @@ namespace PluginCalculator.Core.ViewModels
 		}
 
 		private void DoEqualsPressed() {
+			if (IsLoading)
+				return;
+
 			if (null == ResultBacklog)
 				return;
 

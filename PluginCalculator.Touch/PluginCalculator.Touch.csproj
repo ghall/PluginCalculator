@@ -105,6 +105,9 @@
     <Reference Include="Cirrious.MvvmCross">
       <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.2.2\lib\MonoTouch\Cirrious.MvvmCross.dll</HintPath>
     </Reference>
+    <Reference Include="MBProgressHUD">
+      <HintPath>..\Components\mbprogresshud-0.9.0\lib\ios\MBProgressHUD.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
@@ -140,5 +143,11 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Views\CalculatorView.xib" />
+  </ItemGroup>
+  <ItemGroup>
+    <XamarinComponentReference Include="mbprogresshud">
+      <Version>0.9.0</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
   </ItemGroup>
 </Project>

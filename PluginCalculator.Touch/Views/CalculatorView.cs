@@ -5,11 +5,15 @@ using MonoTouch.UIKit;
 using Cirrious.MvvmCross.Touch.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using PluginCalculator.Core.ViewModels;
+using MBProgressHUD;
 
 namespace PluginCalculator.Touch.Views
 {
 	public partial class CalculatorView : MvxViewController
 	{
+		private bool _inProgress;
+		private MTMBProgressHUD _hud;
+
 		public CalculatorView () : base ("CalculatorView", null)
 		{
 		}
@@ -24,6 +28,12 @@ namespace PluginCalculator.Touch.Views
 			base.ViewDidLoad ();
 
 			NavigationController.NavigationBarHidden = true;
+
+			_hud = new MTMBProgressHUD (View) {
+				LabelText = "Executing..."
+			};
+
+			View.AddSubview (_hud);
 
 			var set = this.CreateBindingSet<CalculatorView, CalculatorViewModel> ();
 			set.Bind (ResultField).For(v => v.Text).To (vm => vm.DisplayField);
@@ -45,7 +55,23 @@ namespace PluginCalculator.Touch.Views
 			set.Bind (Plus).To (vm => vm.PlusPressed);
 			set.Bind (Minus).To (vm => vm.MinusPressed);
 			set.Bind (Equals).To (vm => vm.EqualsPressed);
+			set.Bind (this).For (v => v.InProgress).To (vm => vm.IsLoading);
 			set.Apply ();
+		}
+
+		public bool InProgress {
+			get { return _inProgress; }
+			set {
+				_inProgress = value;
+
+				if (null == _hud)
+					return;
+
+				if (_inProgress)
+					_hud.Show (true);
+				else
+					_hud.Hide (true);
+			}
 		}
 	}
 }
