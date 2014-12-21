@@ -16,6 +16,7 @@ namespace PluginCalculator.Core.ViewModels
 		private IMvxCommand _sevenPressed;
 		private IMvxCommand _eightPressed;
 		private IMvxCommand _ninePressed;
+		private IMvxCommand _decimalPressed;
 
 		public CalculatorViewModel ()
 		{
@@ -25,7 +26,7 @@ namespace PluginCalculator.Core.ViewModels
 			get { return _resultField ?? "0"; }
 			set { 
 				_resultField = value;
-				RaisePropertyChanged (ResultField);
+				RaisePropertyChanged (() => ResultField);
 			}
 		}
 
@@ -67,6 +68,10 @@ namespace PluginCalculator.Core.ViewModels
 
 		public IMvxCommand NinePressed {
 			get { return _ninePressed ?? (_ninePressed = new MvxCommand(DoNinePressed)); }
+		}
+
+		public IMvxCommand DecimalPressed {
+			get { return _decimalPressed ?? (_decimalPressed = new MvxCommand(DoDecimalPressed)); }
 		}
 			
 		private void NumberPressed(int number) {
@@ -114,6 +119,13 @@ namespace PluginCalculator.Core.ViewModels
 
 		private void DoNinePressed() {
 			NumberPressed (9);
+		}
+
+		private void DoDecimalPressed() {
+			if (ResultField.Contains ("."))
+				return;
+
+			ResultField += ".";
 		}
 	}
 }

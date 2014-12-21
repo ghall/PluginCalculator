@@ -27,6 +27,13 @@ namespace PluginCalculator.Core.UnitTests.ViewModels
 		}
 
 		[Test]
+		public void ResultField_CanNotBeNull() {
+			_target.ResultField = null;
+
+			Assert.NotNull (_target.ResultField);
+		}
+
+		[Test]
 		public void ZeroPressed_Success() {
 			_target.ResultField = "1";
 
@@ -267,6 +274,24 @@ namespace PluginCalculator.Core.UnitTests.ViewModels
 			_target.NinePressed.Execute ();
 
 			Assert.AreEqual ("9", _target.ResultField);
+		}
+
+		[Test]
+		public void DecimalPressed_Success() {
+			_target.ResultField = "13";
+
+			_target.DecimalPressed.Execute ();
+
+			Assert.AreEqual ("13.", _target.ResultField);
+		}
+
+		[Test]
+		public void DecimalPressed_AlreadyContainsDecimal() {
+			_target.ResultField = "13.37";
+
+			_target.DecimalPressed.Execute ();
+
+			Assert.AreEqual ("13.37", _target.ResultField);
 		}
 	}
 }
