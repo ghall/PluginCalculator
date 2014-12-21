@@ -281,7 +281,7 @@ namespace PluginCalculator.Core.ViewModels
 				} catch (Exception e) {
 					_logger.Log(e.Message);
 					_logger.Log(e.StackTrace);
-					_dialogPlugin.ShowMessage("Error", "Internal error: " + e.Message, "Cancel");
+					_dialogPlugin.ShowMessage("Exception", "Internal error: " + e.Message, "Cancel");
 				} finally {
 					IsLoading = false;
 				}

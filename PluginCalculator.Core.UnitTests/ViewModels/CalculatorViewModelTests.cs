@@ -475,6 +475,35 @@ namespace PluginCalculator.Core.UnitTests.ViewModels
 			Assert.AreEqual ("3", _target.ResultBacklog);
 			Assert.AreEqual ("2", _target.ResultField);
 		}
+
+		[Test]
+		public void EqualsPressed_ExceptionPath() {
+			_mathRepository
+				.Setup (x => x.IsValid (It.IsAny<string> (), It.IsAny<MathOperation> (), It.IsAny<string> ()))
+				.Returns (EquationValidity.Valid);
+			_mathRepository
+				.Setup (x => x.CreateEquation (It.IsAny<string> (), It.IsAny<MathOperation> (), It.IsAny<string> ()))
+				.Returns ("3/2");
+			_resultRepository
+				.Setup (x => x.Execute (It.IsAny<string> ()))
+				.Throws(new Exception());
+			_target.ResultField = "3";
+			_target.DividePressed.Execute ();
+			_target.ResultField = "2";
+
+			Assume.That (_target.ResultBacklog, Is.EqualTo ("3"));
+			Assume.That (_target.PendingOperation, Is.EqualTo (MathOperation.Division));
+			Assume.That (_target.ResultField, Is.EqualTo ("2"));
+
+			_target.EqualsPressed.Execute ();
+
+			Thread.Sleep (100);
+
+			_dialogPlugin.Verify (x => x.ShowMessage (It.Is<string> (s => "Exception" == s), It.IsAny<string> (), It.IsAny<string> ()), Times.Once);
+			_loggerPlugin.Verify(x => x.Log(It.IsAny<string>()), Times.AtLeast(2));
+			Assert.AreEqual ("3", _target.ResultBacklog);
+			Assert.AreEqual ("2", _target.ResultField);
+		}
 	}
 }
 
