@@ -26,7 +26,7 @@ namespace PluginCalculator.Touch.Views
 			NavigationController.NavigationBarHidden = true;
 
 			var set = this.CreateBindingSet<CalculatorView, CalculatorViewModel> ();
-			set.Bind (ResultField).For(v => v.Text).To (vm => vm.ResultField);
+			set.Bind (ResultField).For(v => v.Text).To (vm => vm.DisplayField);
 			set.Bind (Zero).To (vm => vm.ZeroPressed);
 			set.Bind (One).To (vm => vm.OnePressed);
 			set.Bind (Two).To (vm => vm.TwoPressed);
@@ -40,6 +40,10 @@ namespace PluginCalculator.Touch.Views
 			set.Bind (Decimal).To (vm => vm.DecimalPressed);
 			set.Bind (ToggleSign).To (vm => vm.ToggleSignPressed);
 			set.Bind (Clear).To (vm => vm.ClearPressed);
+			set.Bind (Divise).To (vm => vm.DividePressed);
+			set.Bind (Multiply).To (vm => vm.TimesPressed);
+			set.Bind (Plus).To (vm => vm.PlusPressed);
+			set.Bind (Minus).To (vm => vm.MinusPressed);
 			set.Apply ();
 		}
 	}

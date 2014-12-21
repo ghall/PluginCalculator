@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using PluginCalculator.Core.ViewModels;
 using Cirrious.MvvmCross.Test.Core;
+using PluginCalculator.Core.Repositories.Math;
 
 namespace PluginCalculator.Core.UnitTests.ViewModels
 {
@@ -328,6 +329,46 @@ namespace PluginCalculator.Core.UnitTests.ViewModels
 			_target.ClearPressed.Execute ();
 
 			Assert.AreEqual ("0", _target.ResultField);
+		}
+
+		[Test]
+		public void PlusPressed_Success() {
+			_target.ResultField = "3";
+
+			_target.PlusPressed.Execute ();
+
+			Assert.AreEqual ("3", _target.ResultBacklog);
+			Assert.AreEqual (MathOperation.Addition, _target.PendingOperation);
+		}
+
+		[Test]
+		public void MinusPressed_Success() {
+			_target.ResultField = "3";
+
+			_target.MinusPressed.Execute ();
+
+			Assert.AreEqual ("3", _target.ResultBacklog);
+			Assert.AreEqual (MathOperation.Subtraction, _target.PendingOperation);
+		}
+
+		[Test]
+		public void TimesPressed_Success() {
+			_target.ResultField = "3";
+
+			_target.TimesPressed.Execute ();
+
+			Assert.AreEqual ("3", _target.ResultBacklog);
+			Assert.AreEqual (MathOperation.Mulitiplication, _target.PendingOperation);
+		}
+
+		[Test]
+		public void DividePressed_Success() {
+			_target.ResultField = "3";
+
+			_target.DividePressed.Execute ();
+
+			Assert.AreEqual ("3", _target.ResultBacklog);
+			Assert.AreEqual (MathOperation.Division, _target.PendingOperation);
 		}
 	}
 }
