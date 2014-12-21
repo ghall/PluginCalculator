@@ -18,4 +18,4 @@ build/
 _NCrunch*
 _ReSharper*/
 *.[Rr]e[Ss]harper
-
+packages/
