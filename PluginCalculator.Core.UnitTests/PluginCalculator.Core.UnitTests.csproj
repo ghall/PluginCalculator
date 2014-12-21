@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D1896E7E-D1F1-4679-B7F9-900F50C643DC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>PluginCalculator.Core.UnitTests</RootNamespace>
+    <AssemblyName>PluginCalculator.Core.UnitTests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.CrossCore.Wpf">
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.2.2\lib\net45\Cirrious.CrossCore.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.CrossCore">
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.2.2\lib\net45\Cirrious.CrossCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Localization">
+      <HintPath>..\packages\MvvmCross.HotTuna.CrossCore.3.2.2\lib\net45\Cirrious.MvvmCross.Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Wpf">
+      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.2.2\lib\net45\Cirrious.MvvmCross.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross">
+      <HintPath>..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.2.2\lib\net45\Cirrious.MvvmCross.dll</HintPath>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Test.Core">
+      <HintPath>..\packages\MvvmCross.HotTuna.Tests.3.2.2\lib\net45\Cirrious.MvvmCross.Test.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ViewModels\CalculatorViewModelTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PluginCalculator.Core\PluginCalculator.Core.csproj">
+      <Project>{6613A134-98E3-4972-8780-1167A457B647}</Project>
+      <Name>PluginCalculator.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
