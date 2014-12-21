@@ -17,6 +17,7 @@ namespace PluginCalculator.Core.ViewModels
 		private IMvxCommand _eightPressed;
 		private IMvxCommand _ninePressed;
 		private IMvxCommand _decimalPressed;
+		private IMvxCommand _toggleSignPressed;
 
 		public CalculatorViewModel ()
 		{
@@ -73,6 +74,10 @@ namespace PluginCalculator.Core.ViewModels
 		public IMvxCommand DecimalPressed {
 			get { return _decimalPressed ?? (_decimalPressed = new MvxCommand(DoDecimalPressed)); }
 		}
+
+		public IMvxCommand ToggleSignPressed {
+			get { return _toggleSignPressed ?? (_toggleSignPressed = new MvxCommand(DoToggleSignPressed)); }
+		}
 			
 		private void NumberPressed(int number) {
 			if ("0" == ResultField)
@@ -126,6 +131,13 @@ namespace PluginCalculator.Core.ViewModels
 				return;
 
 			ResultField += ".";
+		}
+
+		private void DoToggleSignPressed() {
+			if (ResultField.StartsWith ("-"))
+				ResultField = ResultField.Substring (1);
+			else
+				ResultField = "-" + ResultField;
 		}
 	}
 }

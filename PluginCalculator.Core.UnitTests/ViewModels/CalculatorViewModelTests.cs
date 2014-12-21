@@ -293,6 +293,24 @@ namespace PluginCalculator.Core.UnitTests.ViewModels
 
 			Assert.AreEqual ("13.37", _target.ResultField);
 		}
+
+		[Test]
+		public void ToggleSignPressed_FromPositive() {
+			_target.ResultField = "13.37";
+
+			_target.ToggleSignPressed.Execute ();
+
+			Assert.AreEqual ("-13.37", _target.ResultField);
+		}
+
+		[Test]
+		public void ToggleSignPressed_FromNegative() {
+			_target.ResultField = "-13.37";
+
+			_target.ToggleSignPressed.Execute ();
+
+			Assert.AreEqual ("13.37", _target.ResultField);
+		}
 	}
 }
 
