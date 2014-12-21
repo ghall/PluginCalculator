@@ -393,32 +393,80 @@ namespace PluginCalculator.Core.UnitTests.ViewModels
 			Assert.AreEqual (MathOperation.Division, _target.PendingOperation);
 		}
 
-		[Test]
-		public void EqualsPressed_Success() {
-			_mathRepository
-				.Setup (x => x.IsValid (It.IsAny<string> (), It.IsAny<MathOperation> (), It.IsAny<string> ()))
-				.Returns (EquationValidity.Valid);
-			_mathRepository
-				.Setup (x => x.CreateEquation (It.IsAny<string> (), It.IsAny<MathOperation> (), It.IsAny<string> ()))
-				.Returns ("3/2");
-			_resultRepository
-				.Setup (x => x.Execute (It.IsAny<string> ()))
-				.Returns ("1.5");
-			_target.ResultField = "3";
-			_target.DividePressed.Execute ();
-			_target.ResultField = "2";
+        [Test]
+        public void EqualsPressed_Success()
+        {
+            _mathRepository
+                .Setup(x => x.IsValid(It.IsAny<string>(), It.IsAny<MathOperation>(), It.IsAny<string>()))
+                .Returns(EquationValidity.Valid);
+            _mathRepository
+                .Setup(x => x.CreateEquation(It.IsAny<string>(), It.IsAny<MathOperation>(), It.IsAny<string>()))
+                .Returns("3/2");
+            _resultRepository
+                .Setup(x => x.Execute(It.IsAny<string>()))
+                .Returns("1.5");
+            _target.ResultField = "3";
+            _target.DividePressed.Execute();
+            _target.ResultField = "2";
 
-			Assume.That (_target.ResultBacklog, Is.EqualTo ("3"));
-			Assume.That (_target.PendingOperation, Is.EqualTo (MathOperation.Division));
-			Assume.That (_target.ResultField, Is.EqualTo ("2"));
+            Assume.That(_target.ResultBacklog, Is.EqualTo("3"));
+            Assume.That(_target.PendingOperation, Is.EqualTo(MathOperation.Division));
+            Assume.That(_target.ResultField, Is.EqualTo("2"));
 
-			_target.EqualsPressed.Execute ();
+            _target.EqualsPressed.Execute();
 
-			Thread.Sleep (100);
+            Thread.Sleep(100);
 
-			Assert.IsNull (_target.ResultBacklog);
-			Assert.AreEqual ("1.5", _target.ResultField);
-		}
+            Assert.IsNull(_target.ResultBacklog);
+            Assert.AreEqual("1.5", _target.ResultField);
+        }
+
+        [Test]
+        public void EqualsPressed_Success_ClearsAfterExecution()
+        {
+            _mathRepository
+                .Setup(x => x.IsValid(It.IsAny<string>(), It.IsAny<MathOperation>(), It.IsAny<string>()))
+                .Returns(EquationValidity.Valid);
+            _mathRepository
+                .Setup(x => x.CreateEquation(It.IsAny<string>(), It.IsAny<MathOperation>(), It.IsAny<string>()))
+                .Returns("3/2");
+            _resultRepository
+                .Setup(x => x.Execute(It.IsAny<string>()))
+                .Returns("1.5");
+            _target.ResultField = "3";
+            _target.DividePressed.Execute();
+            _target.ResultField = "2";
+            _target.EqualsPressed.Execute();
+            Thread.Sleep(100);
+
+            _target.FourPressed.Execute();
+
+            Assert.AreEqual("4", _target.ResultField);
+        }
+
+        [Test]
+        public void EqualsPressed_Success_DecimalClearsAfterExecution()
+        {
+            _mathRepository
+                .Setup(x => x.IsValid(It.IsAny<string>(), It.IsAny<MathOperation>(), It.IsAny<string>()))
+                .Returns(EquationValidity.Valid);
+            _mathRepository
+                .Setup(x => x.CreateEquation(It.IsAny<string>(), It.IsAny<MathOperation>(), It.IsAny<string>()))
+                .Returns("3/2");
+            _resultRepository
+                .Setup(x => x.Execute(It.IsAny<string>()))
+                .Returns("1.5");
+            _target.ResultField = "3";
+            _target.DividePressed.Execute();
+            _target.ResultField = "2";
+            _target.EqualsPressed.Execute();
+            Thread.Sleep(100);
+
+            _target.DecimalPressed.Execute();
+
+            Assert.AreEqual("0.", _target.ResultField);
+        }
+
 
 		[Test]
 		public void EqualsPressed_DivByZero() {
@@ -504,6 +552,105 @@ namespace PluginCalculator.Core.UnitTests.ViewModels
 			Assert.AreEqual ("3", _target.ResultBacklog);
 			Assert.AreEqual ("2", _target.ResultField);
 		}
+
+        [Test]
+	    public void DisplayField_Test()
+	    {
+	        _target.ResultField = "3";
+            
+            Assert.AreEqual("3", _target.DisplayField);
+	    }
+
+        [Test]
+	    public void DisplayField_Test_AfterOperation()
+	    {
+	        _target.ResultField = "3";
+            _target.PlusPressed.Execute();
+
+            Assert.AreEqual("3", _target.DisplayField);
+            Assert.AreNotEqual("3", _target.ResultField);
+	    }
+
+	    [Test]
+	    public void DisplayField_Test_AfterOperationWithValue()
+	    {
+	        _target.ResultField = "3";
+            _target.PlusPressed.Execute();
+            _target.OnePressed.Execute();
+
+            Assert.AreEqual("1", _target.DisplayField);
+	    }
+
+        [Test]
+        public void NumberPressed_DisableWhileLoading()
+        {
+            _target.ResultField = "3";
+            _target.IsLoading = true;
+            _target.OnePressed.Execute();
+
+            Assert.AreEqual("3", _target.ResultField);
+        }
+
+        [Test]
+        public void DecimalPressed_DisableWhileLoading()
+        {
+            _target.ResultField = "3";
+            _target.IsLoading = true;
+            _target.DecimalPressed.Execute();
+
+            Assert.AreEqual("3", _target.ResultField);
+        }
+
+        [Test]
+        public void ToggleSignPressed_DisableWhileLoading()
+        {
+            _target.ResultField = "3";
+            _target.IsLoading = true;
+            _target.ToggleSignPressed.Execute();
+
+            Assert.AreEqual("3", _target.ResultField);
+        }
+
+        [Test]
+        public void ClearPressed_DisableWhileLoading()
+        {
+            _target.ResultField = "3";
+            _target.IsLoading = true;
+            _target.ClearPressed.Execute();
+
+            Assert.AreEqual("3", _target.ResultField);
+        }
+
+        [Test]
+        public void OperatorPressed_DisableWhileLoading()
+        {
+            _target.ResultField = "3";
+            _target.IsLoading = true;
+            _target.MinusPressed.Execute();
+
+            Assert.AreEqual("3", _target.ResultField);
+        }
+
+        [Test]
+        public void EqualsPressed_DisableWhileLoading()
+        {
+            _target.ResultField = "3";
+            _target.IsLoading = true;
+            _target.EqualsPressed.Execute();
+
+            Assert.AreEqual("3", _target.ResultField);
+            _mathRepository.Verify(x => x.IsValid(It.IsAny<string>(), It.IsAny<MathOperation>(), It.IsAny<string>()), Times.Never);
+        }
+
+        [Test]
+        public void EqualsPressed_NothingInBacklog()
+        {
+            _target.ResultField = "3";
+            _target.EqualsPressed.Execute();
+
+            Assert.AreEqual("3", _target.ResultField);
+            _mathRepository.Verify(x => x.IsValid(It.IsAny<string>(), It.IsAny<MathOperation>(), It.IsAny<string>()), Times.Never);
+        }
 	}
 }
 
