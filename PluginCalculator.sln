@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginCalculator.Touch", "P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginCalculator.Core.UnitTests", "PluginCalculator.Core.UnitTests\PluginCalculator.Core.UnitTests.csproj", "{D1896E7E-D1F1-4679-B7F9-900F50C643DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginCalculator.Core.IntegrationTests", "PluginCalculator.Core.IntegrationTests\PluginCalculator.Core.IntegrationTests.csproj", "{BADA357B-2A73-422F-928D-BD883D130B4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,22 @@ Global
 		{6613A134-98E3-4972-8780-1167A457B647}.Release|iPhone.Build.0 = Release|Any CPU
 		{6613A134-98E3-4972-8780-1167A457B647}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{6613A134-98E3-4972-8780-1167A457B647}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{BADA357B-2A73-422F-928D-BD883D130B4A}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{BADA357B-2A73-422F-928D-BD883D130B4A}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{BADA357B-2A73-422F-928D-BD883D130B4A}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{BADA357B-2A73-422F-928D-BD883D130B4A}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{BADA357B-2A73-422F-928D-BD883D130B4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BADA357B-2A73-422F-928D-BD883D130B4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BADA357B-2A73-422F-928D-BD883D130B4A}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{BADA357B-2A73-422F-928D-BD883D130B4A}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{BADA357B-2A73-422F-928D-BD883D130B4A}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{BADA357B-2A73-422F-928D-BD883D130B4A}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{BADA357B-2A73-422F-928D-BD883D130B4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BADA357B-2A73-422F-928D-BD883D130B4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BADA357B-2A73-422F-928D-BD883D130B4A}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{BADA357B-2A73-422F-928D-BD883D130B4A}.Release|iPhone.Build.0 = Release|Any CPU
+		{BADA357B-2A73-422F-928D-BD883D130B4A}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{BADA357B-2A73-422F-928D-BD883D130B4A}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{D1896E7E-D1F1-4679-B7F9-900F50C643DC}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
 		{D1896E7E-D1F1-4679-B7F9-900F50C643DC}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
 		{D1896E7E-D1F1-4679-B7F9-900F50C643DC}.AppStore|iPhone.ActiveCfg = Release|Any CPU
