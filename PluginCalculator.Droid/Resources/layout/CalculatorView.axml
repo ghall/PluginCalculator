@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <TextView
+        android:text="43"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/textView1"
+        android:textColor="@android:color/black"
+        android:background="@android:color/white"
+        android:textSize="35dp"
+        android:gravity="right"
+        local:MvxBind="Text DisplayField" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:text="AC"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            style="@style/ActionButtons"
+            local:MvxBind="Click ClearPressed" />
+        <Button
+            android:text="+/-"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            style="@style/ActionButtons"
+            local:MvxBind="Click ToggleSignPressed" />
+        <Button
+            android:text="÷"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            style="@style/OperatorButton"
+            local:MvxBind="Click DividePressed" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:text="7"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            style="@style/Number"
+            local:MvxBind="Click SevenPressed" />
+        <Button
+            android:text="8"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            style="@style/Number"
+            local:MvxBind="Click EightPressed" />
+        <Button
+            android:text="9"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            style="@style/Number"
+            local:MvxBind="Click NinePressed" />
+        <Button
+            android:text="×"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            style="@style/OperatorButton"
+            local:MvxBind="Click TimesPressed" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1">
+        <Button
+            android:text="4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            style="@style/Number"
+            local:MvxBind="Click FourPressed" />
+        <Button
+            android:text="5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            style="@style/Number"
+            local:MvxBind="Click FivePressed" />
+        <Button
+            android:text="6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            style="@style/Number"
+            local:MvxBind="Click SixPressed" />
+        <Button
+            android:text="-"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            style="@style/OperatorButton"
+            local:MvxBind="Click MinusPressed" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:text="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            style="@style/Number"
+            local:MvxBind="Click OnePressed" />
+        <Button
+            android:text="2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            style="@style/Number"
+            local:MvxBind="Click TwoPressed" />
+        <Button
+            android:text="3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            style="@style/Number"
+            local:MvxBind="Click ThreePressed" />
+        <Button
+            android:text="+"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            style="@style/OperatorButton"
+            local:MvxBind="Click PlusPressed" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:text="0"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            style="@style/Number"
+            local:MvxBind="Click ZeroPressed" />
+        <Button
+            android:text="."
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            style="@style/Number"
+            local:MvxBind="Click DecimalPressed" />
+        <Button
+            android:text="="
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            style="@style/OperatorButton"
+            local:MvxBind="Click EqualsPressed" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="OperatorButton">
+    <item name="android:textSize">25dp</item>
+    <item name="android:background">#ff6f36</item>
+    <item name="android:textColor">@android:color/white</item>
+    <item name="android:layout_margin">3dp</item>
+  </style>
+
+  <style name="ActionButtons">
+    <item name="android:textSize">25dp</item>
+    <item name="android:background">#DED9D7</item>
+    <item name="android:textColor">@android:color/black</item>
+    <item name="android:layout_margin">3dp</item>
+  </style>
+
+  <style name="Number">
+    <item name="android:textSize">25dp</item>
+    <item name="android:background">#E8E5E3</item>
+    <item name="android:textColor">@android:color/black</item>
+    <item name="android:layout_margin">3dp</item>
+  </style>
+</resources>
