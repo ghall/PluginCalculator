@@ -4,6 +4,6 @@ namespace PluginCalculator.Core.NativePlugins
 {
 	public interface ILogger
 	{
-		void Log(string message);
+		void Log(object sender, string message);
 	}
 }

@@ -27,8 +27,8 @@ namespace PluginCalculator.Core.Repositories.Result
 				if (null != result && result.IsSuccessful && null != result.Result && result.Result.ContainsKey ("result"))
 					return result.Result ["result"];
 			} catch (Exception e) {
-				_logger.Log ("Error getting result: " + e.Message);
-				_logger.Log (e.StackTrace);
+				_logger.Log (this, "Error getting result: " + e.Message);
+				_logger.Log (this, e.StackTrace);
 			}
 			return null;
 		}

@@ -548,7 +548,7 @@ namespace PluginCalculator.Core.UnitTests.ViewModels
 			Thread.Sleep (100);
 
 			_dialogPlugin.Verify (x => x.ShowMessage (It.Is<string> (s => "Exception" == s), It.IsAny<string> (), It.IsAny<string> ()), Times.Once);
-			_loggerPlugin.Verify(x => x.Log(It.IsAny<string>()), Times.AtLeast(2));
+			_loggerPlugin.Verify(x => x.Log(It.IsAny<object>(), It.IsAny<string>()), Times.AtLeast(2));
 			Assert.AreEqual ("3", _target.ResultBacklog);
 			Assert.AreEqual ("2", _target.ResultField);
 		}

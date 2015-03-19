@@ -5,9 +5,9 @@ namespace PluginCalculator.Droid.NativePlugins
 {
     public class DroidLogger : ILogger
     {
-        public void Log(string message)
+        public void Log(object sender, string message)
         {
-            Console.WriteLine(message);
+			Android.Util.Log.Debug (null != sender ? sender.GetType ().Name : "PluginCalculator.Droid", message);
         }
     }
 }

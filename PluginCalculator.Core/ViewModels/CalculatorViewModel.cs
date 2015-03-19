@@ -309,8 +309,8 @@ namespace PluginCalculator.Core.ViewModels
 					ResultField = result;
 					_shouldClearOnNumberPress = true;
 				} catch (Exception e) {
-					_logger.Log(e.Message);
-					_logger.Log(e.StackTrace);
+					_logger.Log(this, e.Message);
+					_logger.Log(this, e.StackTrace);
 					_dialogPlugin.ShowMessage("Exception", "Internal error: " + e.Message, "Cancel");
 				} finally {
 					IsLoading = false;
