@@ -41,6 +41,9 @@
     <Compile Include="NativePlugins\IDialogPlugin.cs" />
     <Compile Include="NativePlugins\ILogger.cs" />
     <Compile Include="Repositories\Result\JsonResultRepository.cs" />
+    <Compile Include="Providers\JsonHttpProvider\IJsonHttpProvider.cs" />
+    <Compile Include="Providers\JsonHttpProvider\JsonHttpProvider.cs" />
+    <Compile Include="Providers\JsonHttpProvider\ApiResult.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -75,5 +78,7 @@
     <Folder Include="Repositories\Math\" />
     <Folder Include="Repositories\Result\" />
     <Folder Include="NativePlugins\" />
+    <Folder Include="Providers\" />
+    <Folder Include="Providers\JsonHttpProvider\" />
   </ItemGroup>
 </Project>

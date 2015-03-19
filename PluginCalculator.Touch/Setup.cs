@@ -7,6 +7,7 @@ using PluginCalculator.Core.Repositories.Math;
 using PluginCalculator.Core.NativePlugins;
 using PluginCalculator.Touch.NativePlugins;
 using PluginCalculator.Core.Repositories.Result;
+using PluginCalculator.Core.Providers.JsonHttpProvider;
 
 namespace PluginCalculator.Touch
 {
@@ -35,6 +36,7 @@ namespace PluginCalculator.Touch
 			Mvx.LazyConstructAndRegisterSingleton<ILogger, TouchLogger> ();
 			Mvx.LazyConstructAndRegisterSingleton<IDialogPlugin, TouchDialogPlugin> ();
 			Mvx.LazyConstructAndRegisterSingleton<IResultRepository, JsonResultRepository> ();
+			Mvx.LazyConstructAndRegisterSingleton<IJsonHttpProvider, JsonHttpProvider> ();
 		}
 	}
 }

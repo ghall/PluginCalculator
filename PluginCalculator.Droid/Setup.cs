@@ -7,6 +7,7 @@ using PluginCalculator.Core.NativePlugins;
 using PluginCalculator.Core.Repositories.Math;
 using PluginCalculator.Core.Repositories.Result;
 using PluginCalculator.Droid.NativePlugins;
+using PluginCalculator.Core.Providers.JsonHttpProvider;
 
 namespace PluginCalculator.Droid
 {
@@ -34,6 +35,7 @@ namespace PluginCalculator.Droid
             Mvx.LazyConstructAndRegisterSingleton<ILogger, DroidLogger>();
             Mvx.LazyConstructAndRegisterSingleton<IDialogPlugin, DroidDialogPlugin>();
             Mvx.LazyConstructAndRegisterSingleton<IResultRepository, JsonResultRepository>();
+			Mvx.LazyConstructAndRegisterSingleton<IJsonHttpProvider, JsonHttpProvider> ();
         }
     }
 }
